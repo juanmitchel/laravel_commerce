@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace CodeCommerce\Http\Controllers;
 
 class WelcomeController extends Controller {
 
@@ -32,5 +32,12 @@ class WelcomeController extends Controller {
 	{
 		return view('welcome');
 	}
+    public function exemplo()
+    {
+        $nome = "Juan";
+        $sobrenome = "Barros";
+
+        return view('exemplo', compact('nome','sobrenome'));
+    }
 
 }
