@@ -12,17 +12,20 @@
 */
 
 Route::pattern('id', '[0-9]+');
+Route::pattern('name', '[A-Za-z]+');
+Route::pattern('description', '[A-Za-z]+');
+Route::pattern('price', '[0-9]+');
 
 Route::group(['prefix'=>'admin'], function() {
     Route::get('categories/{id?}', ['as'=>'category', 'WelcomeController@exemplo']);
-    Route::put('categories/{id?}', ['as'=>'category', 'WelcomeController@exemplo']);
-    Route::post('categories/{id?}', ['as'=>'category', 'WelcomeController@exemplo']);
     Route::delete('categories/{id?}', ['as'=>'category', 'WelcomeController@exemplo']);
+    Route::put('categories/{id?}/{name?}/{description?}', ['as'=>'category', 'WelcomeController@exemplo']);
+    Route::post('categories/{name?}/{description?}', ['as'=>'category', 'WelcomeController@exemplo']);
 
     Route::get('products/{id?}', ['as'=>'product', 'WelcomeController@exemplo']);
-    Route::put('products/{id?}', ['as'=>'product', 'WelcomeController@exemplo']);
-    Route::post('products/{id?}', ['as'=>'product', 'WelcomeController@exemplo']);
     Route::delete('products/{id?}', ['as'=>'product', 'WelcomeController@exemplo']);
+    Route::put('products/{id?}/{name?}/{description?}/{price?}', ['as'=>'product', 'WelcomeController@exemplo']);
+    Route::post('products/{name?}/{description?}/{price?}', ['as'=>'product', 'WelcomeController@exemplo']);
 });
 
 Route::get('/', 'WelcomeController@index');
