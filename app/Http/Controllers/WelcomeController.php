@@ -41,8 +41,6 @@ class WelcomeController extends Controller {
     public function exemplo()
     {
         $categories = $this->categories->all();
-
         return view('exemplo', compact('categories'));
     }
-
 }

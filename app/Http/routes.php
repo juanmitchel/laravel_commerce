@@ -11,21 +11,38 @@
 |
 */
 
-Route::pattern('id', '[0-9]+');
-Route::pattern('name', '[A-Za-z]+');
-Route::pattern('description', '[A-Za-z]+');
-Route::pattern('price', '[0-9]+');
+Route::pattern('category', '[0-9]+');
+Route::pattern('product', '[0-9]+');
 
 Route::group(['prefix'=>'admin'], function() {
-    Route::get('categories/{id?}', ['as'=>'category', 'WelcomeController@exemplo']);
-    Route::delete('categories/{id?}', ['as'=>'category', 'WelcomeController@exemplo']);
-    Route::put('categories/{id?}/{name?}/{description?}', ['as'=>'category', 'WelcomeController@exemplo']);
-    Route::post('categories/{name?}/{description?}', ['as'=>'category', 'WelcomeController@exemplo']);
-
-    Route::get('products/{id?}', ['as'=>'product', 'WelcomeController@exemplo']);
-    Route::delete('products/{id?}', ['as'=>'product', 'WelcomeController@exemplo']);
-    Route::put('products/{id?}/{name?}/{description?}/{price?}', ['as'=>'product', 'WelcomeController@exemplo']);
-    Route::post('products/{name?}/{description?}/{price?}', ['as'=>'product', 'WelcomeController@exemplo']);
+    Route::group(['prefix'=>'categories', 'as'=>'categories'], function() {
+        Route::get('/{category}', function(\CodeCommerce\Category $category) {
+            return 'Read category <strong>'.$category->name.'</strong>';
+        });
+        Route::get('create', function() {
+            return 'Create new category';
+        });
+        Route::get('update/{category}', function(\CodeCommerce\Category $category) {
+            return 'Update category <strong>'.$category->name.'</strong>';
+        });
+        Route::post('delete/{category}', function(\CodeCommerce\Category $category) {
+            return 'Delete category <strong>'.$category->name.'</strong>';
+        });
+    });
+    Route::group(['prefix'=>'products', 'as'=>'products'], function() {
+        Route::get('/{product}', function(\CodeCommerce\Product $product) {
+            return 'Read product <strong>'.$product->name.'</strong>';
+        });
+        Route::get('create', function() {
+            return 'Create new product';
+        });
+        Route::get('update/{product}', function(\CodeCommerce\Product $product) {
+            return 'Update product <strong>'.$product->name.'</strong>';
+        });
+        Route::post('delete/{product}', function(\CodeCommerce\Product $product) {
+            return 'Delete product <strong>'.$product->name.'</strong>';
+        });
+    });
 });
 
 Route::get('/', 'WelcomeController@index');
